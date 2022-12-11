@@ -12,12 +12,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClientService {
-   private final ClientStorage clientStorage;
+    private final ClientStorage clientStorage;
     private final FeedStorage feedStorage;
-    private final  FeedService feedService;
+    private final FeedService feedService;
 
     List<Validation> validations;
-@Autowired
+
+    @Autowired
     public ClientService(ClientStorage clientStorage, FeedStorage feedStorage, FeedService feedService) {
         this.clientStorage = clientStorage;
         this.feedStorage = feedStorage;
@@ -86,8 +87,6 @@ public class ClientService {
     }
 
 
-
-
     public List<Client> findClientByProduct(Integer id) {
 
 
@@ -112,11 +111,7 @@ public class ClientService {
         return clientStorage.addLikeProduct(ClientId, Product_id);
 
 
-
-}
-
-
-
+    }
 
 
     public void removeRewiew(Integer ClientId, Integer SalesManId) {
