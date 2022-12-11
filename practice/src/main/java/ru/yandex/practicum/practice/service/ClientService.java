@@ -1,5 +1,6 @@
 package ru.yandex.practicum.practice.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.practice.model.*;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class ClientService {
     private final ClientStorage clientStorage;
     private final FeedStorage feedStorage;
@@ -114,8 +116,9 @@ public class ClientService {
     }
 
 
-    public void removeRewiew(Integer ClientId, Integer SalesManId) {
-        clientStorage.removeRewiew(ClientId, SalesManId);
+    public void removeRewiew(Integer clientId, Integer salesManId) {
+        log.info("удален отзыв клиент" + clientId);
+        clientStorage.removeRewiew(clientId, salesManId);
     }
 
 

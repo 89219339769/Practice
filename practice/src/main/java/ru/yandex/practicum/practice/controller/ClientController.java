@@ -39,6 +39,9 @@ public class ClientController {
 
     @GetMapping()
     public List<Client> findAllClients() {
+
+        log.info("Получены все клиенты");
+
         return clientService.findAllClients();
     }
 
