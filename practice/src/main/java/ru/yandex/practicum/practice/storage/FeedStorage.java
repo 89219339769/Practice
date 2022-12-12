@@ -23,8 +23,8 @@ public class FeedStorage {
     }
 
     public Event addEvent(Event event) {
-        String sqlQuery = "INSERT INTO feed (created_at, client_id, event_type, operation, entity_id) " +
-                "VALUES (?, ?, ?, ?, ?);";
+        String sqlQuery = "INSERT INTO feed (created_at, client_id, event_type, operation ) " +
+                "VALUES (?, ?, ?, ?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             PreparedStatement statement = connection.prepareStatement(sqlQuery, new String[]{"id"});
@@ -32,7 +32,7 @@ public class FeedStorage {
             statement.setLong(2, event.getClientId());
             statement.setString(3, event.getEventType().toString());
             statement.setString(4, event.getOperation().toString());
-            statement.setLong(5, event.getEntityId());
+//            statement.setLong(5, event.getEntityId());
             return statement;
         }, keyHolder);
         event.setEventId(Objects.requireNonNull(keyHolder.getKey()).longValue());
@@ -73,9 +73,9 @@ public class FeedStorage {
         EventTypes eventType = EventTypes.valueOf(rs.getString("event_type"));
         OperationTypes operation = OperationTypes.valueOf(rs.getString("operation"));
         Long eventId = rs.getLong("id");
-        Long entityId = rs.getLong("entity_id");
 
-        return new Event(timestamp, clientId, eventType, operation, eventId, Math.toIntExact(entityId));
+
+        return new Event(timestamp, clientId, eventType, operation, eventId);
     }
 
 

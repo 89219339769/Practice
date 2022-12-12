@@ -24,7 +24,9 @@ public class ClientController {
 
     @GetMapping("/best/{count}")
     public List<Client> findBestClient(@PathVariable Integer count) {
+        log.info("Получены лучшие клиенты");
         return clientService.findBestClients(count);
+
     }
 
     @PostMapping()

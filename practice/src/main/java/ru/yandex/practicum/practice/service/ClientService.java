@@ -1,5 +1,6 @@
 package ru.yandex.practicum.practice.service;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +14,20 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+
 public class ClientService {
     private final ClientStorage clientStorage;
     private final FeedStorage feedStorage;
     private final FeedService feedService;
 
-    List<Validation> validations;
+    private  List<Validation> validations;
 
     @Autowired
-    public ClientService(ClientStorage clientStorage, FeedStorage feedStorage, FeedService feedService) {
+    public ClientService(ClientStorage clientStorage, FeedStorage feedStorage, FeedService feedService, List<Validation> validations) {
         this.clientStorage = clientStorage;
         this.feedStorage = feedStorage;
         this.feedService = feedService;
+        this.validations = validations;
     }
 
 

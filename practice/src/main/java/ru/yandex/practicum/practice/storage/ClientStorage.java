@@ -133,7 +133,6 @@ public class ClientStorage {
                 .clientId(Long.valueOf(clientId))
                 .eventType(EventTypes.REVIEW)
                 .operation(OperationTypes.ADD)
-                .entityId(salesManId)
                 .eventId(0L)
                 .build();
 
@@ -152,7 +151,6 @@ public class ClientStorage {
                 .clientId(Long.valueOf(clientId))
                 .eventType(EventTypes.LIKE)
                 .operation(OperationTypes.ADD)
-                .entityId(product_id)
                 .eventId(0L)
                 .build();
 
@@ -224,7 +222,6 @@ public class ClientStorage {
                 .clientId(Long.valueOf(clientId))
                 .eventType(EventTypes.REVIEW)
                 .operation(OperationTypes.REMOVE)
-                .entityId(salesManId)
                 .eventId(0L)
                 .build();
 
@@ -245,7 +242,6 @@ public class ClientStorage {
                 .clientId(Long.valueOf(clientId))
                 .eventType(EventTypes.LIKE)
                 .operation(OperationTypes.REMOVE)
-                .entityId(productId)
                 .eventId(0L)
                 .build();
 

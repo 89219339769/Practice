@@ -17,5 +17,4 @@ import org.springframework.stereotype.Service;
     private EventTypes eventType;
     private OperationTypes operation;
     private Long eventId;
-    private Integer  entityId;
 }
