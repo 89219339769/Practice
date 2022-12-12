@@ -44,7 +44,7 @@ public class LoggingAspect {
                Event event = Event.builder()
                         .timestamp(System.currentTimeMillis())
                         .clientId(Long.valueOf(client.getId()))
-                        .eventType(EventTypes.REVIEW)
+                        .eventType(EventTypes.CLIENT)
                         .operation(OperationTypes.ADD)
                         .eventId(0L)
                         .build();
