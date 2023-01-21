@@ -31,7 +31,7 @@ public class ClientStorage {
         String sqlQuery = "select * from clients where id = ?";
         Client client;
         try {
-            client = jdbcTemplate.queryForObject(sqlQuery, this::mapRowToClient, id);
+            client = jdbcTemplate.queryForObject(sqlQuery, (rs, rowNum) -> mapRowToClient(rs, rowNum), id);
         } catch (ObjectNotFoundException e) {
             throw new ObjectNotFoundException("Пользователь с id " + id + " не найден.");
         }
@@ -127,17 +127,6 @@ public class ClientStorage {
                 "values (?, ?)";
         jdbcTemplate.update(sqlQuery, clientId, salesManId);
 
-
-        Event event = Event.builder()
-                .timestamp(System.currentTimeMillis())
-                .clientId(Long.valueOf(clientId))
-                .eventType(EventTypes.REVIEW)
-                .operation(OperationTypes.ADD)
-                .eventId(0L)
-                .build();
-
-        feedStorage.addEvent(event);
-
         return true;
     }
 
@@ -145,17 +134,6 @@ public class ClientStorage {
         String sqlQuery = "insert into likes(client_Id, product_id) " +
                 "values (?, ?)";
         jdbcTemplate.update(sqlQuery,clientId,  product_id);
-
-        Event event = Event.builder()
-                .timestamp(System.currentTimeMillis())
-                .clientId(Long.valueOf(clientId))
-                .eventType(EventTypes.LIKE)
-                .operation(OperationTypes.ADD)
-                .eventId(0L)
-                .build();
-
-        feedStorage.addEvent(event);
-
 
         return true;
     }
@@ -217,39 +195,12 @@ public class ClientStorage {
         String sqlQuery = "DELETE FROM goodreviews WHERE client_id = ? AND salesman_id = ?;";
         jdbcTemplate.update(sqlQuery, clientId, salesManId);
 
-        Event event = Event.builder()
-                .timestamp(System.currentTimeMillis())
-                .clientId(Long.valueOf(clientId))
-                .eventType(EventTypes.REVIEW)
-                .operation(OperationTypes.REMOVE)
-                .eventId(0L)
-                .build();
-
-        feedStorage.addEvent(event);
-
-
-
-
     }
 
 
     public void removeLike(Integer clientId, Integer productId){
         String sqlQuery = "DELETE FROM likes WHERE client_id = ? AND product_id = ?;";
         jdbcTemplate.update(sqlQuery, clientId, productId);
-
-        Event event = Event.builder()
-                .timestamp(System.currentTimeMillis())
-                .clientId(Long.valueOf(clientId))
-                .eventType(EventTypes.LIKE)
-                .operation(OperationTypes.REMOVE)
-                .eventId(0L)
-                .build();
-
-        feedStorage.addEvent(event);
-
-
-
-
 
     }
 

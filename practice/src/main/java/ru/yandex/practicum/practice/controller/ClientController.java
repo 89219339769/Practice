@@ -24,7 +24,7 @@ public class ClientController {
 
     @GetMapping("/best/{count}")
     public List<Client> findBestClient(@PathVariable Integer count) {
-        log.info("Получены лучшие клиенты");
+        log.info("Получены лучшие клиенты. Ура");
         return clientService.findBestClients(count);
 
     }
@@ -49,7 +49,7 @@ public class ClientController {
 
 
     @GetMapping("/{id}")
-    public Client findUserById(@PathVariable Long id) {
+    public Client findClientById(@PathVariable Long id) {
         return clientService.findClientById(id);
     }
 
@@ -79,7 +79,7 @@ public class ClientController {
 //    }
 
     @GetMapping("search")
-    public List<Client> findFilmsBySearch(@RequestParam(name = "query") String query) {
+    public List<Client> findClientByName(@RequestParam(name = "query") String query) {
 
         return clientService.findClientByName(query);
     }
